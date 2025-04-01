@@ -81,13 +81,4 @@ tradelens/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
 
-- Next.js team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- Stripe for payment processing capabilities
-- Community contributors and users
-
-## Support
-
-For support, email support@tradelens.com or join our Discord community.
