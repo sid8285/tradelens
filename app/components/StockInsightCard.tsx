@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Badge from './Badge';
 
 interface StockInsightCardProps {
@@ -17,6 +18,7 @@ interface StockInsightCardProps {
     }[];
   };
   authorName?: string;
+  isHotStocks?: boolean;
 }
 
 export default function StockInsightCard({
@@ -25,10 +27,19 @@ export default function StockInsightCard({
   source,
   content,
   stockData,
-  authorName
+  authorName,
+  isHotStocks
 }: StockInsightCardProps) {
+  const CardWrapper = isHotStocks ? Link : 'div';
+  const cardProps = isHotStocks ? { 
+    href: '/hot-stocks',
+    className: "w-full block hover:opacity-95 transition-opacity"
+  } : { 
+    className: "w-full" 
+  };
+
   return (
-    <div className="w-full">
+    <CardWrapper {...cardProps}>
       {(type === 'article' || type === 'community') && (
         <div className="space-y-4">
           <div className="flex items-start gap-3">
@@ -74,6 +85,6 @@ export default function StockInsightCard({
           </div>
         </div>
       )}
-    </div>
+    </CardWrapper>
   );
 } 

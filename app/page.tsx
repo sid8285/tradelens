@@ -65,7 +65,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white rounded-xl p-6">
-              <StockInsightCard {...mockData.hotStocks} />
+              <StockInsightCard {...mockData.hotStocks} isHotStocks={true} />
             </div>
             {mockData.articles.map((article, index) => (
               <div key={`article-${index}`} className="bg-white rounded-xl p-6">
