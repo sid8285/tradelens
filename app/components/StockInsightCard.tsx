@@ -25,21 +25,13 @@ export default function StockInsightCard({
   type,
   title,
   source,
-  content,
+  content: contentText,
   stockData,
   authorName,
   isHotStocks
 }: StockInsightCardProps) {
-  const CardWrapper = isHotStocks ? Link : 'div';
-  const cardProps = isHotStocks ? { 
-    href: '/hot-stocks',
-    className: "w-full block hover:opacity-95 transition-opacity"
-  } : { 
-    className: "w-full" 
-  };
-
-  return (
-    <CardWrapper {...cardProps}>
+  const cardContent = (
+    <div className="w-full">
       {(type === 'article' || type === 'community') && (
         <div className="space-y-4">
           <div className="flex items-start gap-3">
@@ -59,8 +51,8 @@ export default function StockInsightCard({
             </div>
           )}
 
-          {content && (
-            <div className="text-sm text-gray-600">{content}</div>
+          {contentText && (
+            <div className="text-sm text-gray-600">{contentText}</div>
           )}
         </div>
       )}
@@ -85,6 +77,12 @@ export default function StockInsightCard({
           </div>
         </div>
       )}
-    </CardWrapper>
+    </div>
   );
+
+  return isHotStocks ? (
+    <Link href="/hot-stocks" className="block hover:opacity-95 transition-opacity">
+      {cardContent}
+    </Link>
+  ) : cardContent;
 } 
