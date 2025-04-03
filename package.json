@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nodelib/fs.walk": "^3.0.1",
     "@stripe/stripe-js": "^2.4.0",
     "@swc/helpers": "^0.5.15",
     "@types/node": "^20.11.16",

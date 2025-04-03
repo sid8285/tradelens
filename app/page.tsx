@@ -1,5 +1,6 @@
 import StockInsightCard from './components/StockInsightCard'
 import Header from './components/Header'
+import { RedditPost, convertRedditPostToCard } from './utils/reddit'
 
 // Function to format the current date
 function getCurrentDate() {
@@ -11,6 +12,7 @@ function getCurrentDate() {
   return `${month} ${day}, ${year}`
 }
 
+// Static mock data as fallback
 const mockData = {
   hotStocks: {
     title: `Hot Stocks - ${getCurrentDate()}`,
@@ -23,6 +25,10 @@ const mockData = {
   marketOverview: {
     type: 'stats' as const,
     title: 'Market Overview',
+    source: {
+      type: 'AI' as const,
+      description: 'Market indices overview'
+    },
     stockData: {
       symbol: 'MARKET',
       price: 36789.45,
@@ -86,6 +92,10 @@ const mockData = {
   stockStats: {
     type: 'stats' as const,
     title: 'Stock Statistics',
+    source: {
+      type: 'AI' as const,
+      description: 'Stock performance metrics'
+    },
     stockData: {
       symbol: 'STOCK',
       price: 50.38,
@@ -100,6 +110,10 @@ const mockData = {
   watchlistPerformance: {
     type: 'stats' as const,
     title: 'Watchlist Performance',
+    source: {
+      type: 'AI' as const,
+      description: 'Tracked stocks performance'
+    },
     stockData: {
       symbol: 'WATCH',
       price: 0,
@@ -123,7 +137,29 @@ const mockData = {
   }
 };
 
-export default function Home() {
+// Props for the Home component
+interface HomeProps {
+  redditData?: {
+    wallstreetbets?: RedditPost[]
+    investing?: RedditPost[]
+    stocks?: RedditPost[]
+  }
+}
+
+export default function Home({ redditData }: HomeProps) {
+  // Use provided Reddit data or fallback to mock data
+  const trendingDiscussions = redditData?.wallstreetbets?.[0] 
+    ? convertRedditPostToCard(redditData.wallstreetbets[0])
+    : mockData.trendingDiscussions
+
+  const communityInsight = redditData?.investing?.[0]
+    ? convertRedditPostToCard(redditData.investing[0])
+    : mockData.communityInsights[0]
+
+  const latestNews = redditData?.stocks?.[0]
+    ? convertRedditPostToCard(redditData.stocks[0])
+    : mockData.latestNews
+
   return (
     <div className="min-h-screen bg-black">
       <Header />
@@ -137,7 +173,7 @@ export default function Home() {
             <StockInsightCard {...mockData.marketOverview} />
           </div>
           <div className="bg-white rounded-xl p-6">
-            <StockInsightCard {...mockData.trendingDiscussions} />
+            <StockInsightCard {...trendingDiscussions} />
           </div>
 
           {/* Row 2 */}
@@ -145,10 +181,10 @@ export default function Home() {
             <StockInsightCard {...mockData.articles[0]} />
           </div>
           <div className="bg-white rounded-xl p-6">
-            <StockInsightCard {...mockData.latestNews} />
+            <StockInsightCard {...latestNews} />
           </div>
           <div className="bg-white rounded-xl p-6">
-            <StockInsightCard {...mockData.communityInsights[0]} />
+            <StockInsightCard {...communityInsight} />
           </div>
 
           {/* Row 3 */}

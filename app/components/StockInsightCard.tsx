@@ -2,24 +2,24 @@ import Link from 'next/link'
 import Badge from './Badge';
 import { Star } from 'lucide-react';
 
-interface StockInsightCardProps {
-  type: 'article' | 'community' | 'stats';
-  title: string;
-  source?: {
-    type: 'AI' | 'AM';
-    description?: string;
-  };
-  content?: string;
+export type StockInsightCardProps = {
+  title: string
+  type: 'article' | 'community' | 'stats'
+  source: {
+    type: 'AI' | 'AM'
+    description: string
+  }
+  content?: string
+  authorName?: string
   stockData?: {
-    symbol: string;
-    price: number;
-    stats: {
-      label: string;
-      value: string;
-    }[];
-  };
-  authorName?: string;
-  isHotStocks?: boolean;
+    symbol: string
+    price: number
+    stats: Array<{
+      label: string
+      value: string
+    }>
+  }
+  isHotStocks?: boolean
 }
 
 export default function StockInsightCard({
