@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Badge from './Badge';
+import { Star } from 'lucide-react';
 
 interface StockInsightCardProps {
   type: 'article' | 'community' | 'stats';
@@ -35,7 +36,11 @@ export default function StockInsightCard({
       {(type === 'article' || type === 'community') && (
         <div className="space-y-4">
           <div className="flex items-start gap-3">
-            {source && <Badge type={source.type} />}
+            {isHotStocks ? (
+              <Star className="w-6 h-6 text-yellow-400 flex-shrink-0" fill="currentColor" strokeWidth={1.5} />
+            ) : (
+              source && <Badge type={source.type} />
+            )}
             <div className="min-w-0 flex-1">
               <h3 className="text-base font-medium text-black leading-snug">{title}</h3>
               {source?.description && (
