@@ -2,6 +2,15 @@
 import { useState } from 'react';
 
 export default function ClientInsights({ insightsData }) {
+  if (!insightsData || insightsData.length === 0) {
+    return (
+      <div className="text-white text-center mt-10">
+        <h2 className="text-2xl font-bold">No insights available</h2>
+        <p className="text-gray-400 mt-2">Hugging Face may not have returned valid JSON.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-4 p-4 md:grid-cols-2 lg:grid-cols-3">
       {insightsData.map((item, i) => (
