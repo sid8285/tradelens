@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@libsql/client": "^0.15.2",
     "@nodelib/fs.walk": "^3.0.1",
     "@stripe/stripe-js": "^2.4.0",
     "@swc/helpers": "^0.5.15",
@@ -16,7 +17,8 @@
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "autoprefixer": "^10.4.17",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.41.0",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.1.0",
     "lucide-react": "^0.330.0",
@@ -31,6 +33,7 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
+    "drizzle-kit": "^0.30.6",
     "postcss-import": "^16.1.0"
   }
 }
