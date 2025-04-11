@@ -1,7 +1,7 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 
 export const postsTable = sqliteTable('posts', {
-  id: integer('id').primaryKey(),
+  id: text('id').primaryKey(), // Reddit post ID (alphanumeric)
   title: text('title').notNull(),
   body: text('body').notNull(),
   createdUtc: text('created_utc').notNull(),
