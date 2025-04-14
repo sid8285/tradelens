@@ -19,6 +19,17 @@ function Card({ post }) {
       <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
 
       <div className="mb-2">
+        <span className="text-sm text-gray-600">Sentiment Score: </span>
+        <span className={`font-medium ${
+          post.sentiment > 0 ? 'text-green-600' : 
+          post.sentiment < 0 ? 'text-red-600' : 
+          'text-gray-600'
+        }`}>
+          {post.sentiment > 0 ? '+' : ''}{post.sentiment}
+        </span>
+      </div>
+
+      <div className="mb-2">
         <p className="text-gray-600 text-sm whitespace-pre-line">
           {expanded ? post.text : post.text.slice(0, 200) + (post.text.length > 200 ? '...' : '')}
         </p>

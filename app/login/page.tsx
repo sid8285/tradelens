@@ -1,11 +1,18 @@
 'use client'
 
+import { fetchInsights } from '../../lib/getInsights'
 import AuthForm from '../components/AuthForm'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
+  const router = useRouter()
+
   const handleSubmit = async (data: { email: string; password: string }) => {
     // TODO: Implement actual authentication logic
     console.log('Login attempt:', data)
+
+    // go to /
+    router.push('/')
   }
 
   return (
