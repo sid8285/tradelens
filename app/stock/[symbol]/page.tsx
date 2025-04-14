@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import Header from '../../components/Header'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 interface StockPageProps {
   params: {
@@ -12,6 +14,21 @@ interface StockPageProps {
 
 export default function StockPage({ params }: StockPageProps) {
   const { symbol } = params;
+  const searchParams = useSearchParams();
+
+  interface CompanyData {
+    company_description: string;
+    reddit_description: string;
+    sentiment_score: number;
+  }
+
+  const [data, setData] = useState<CompanyData>({
+    company_description: searchParams.get('company_description') || '',
+    reddit_description: searchParams.get('reddit_description') || '',
+    sentiment_score: Number(searchParams.get('sentiment_score')) || 0
+  });
+
+  
   
   return (
     <div className="min-h-screen bg-white">
@@ -32,11 +49,11 @@ export default function StockPage({ params }: StockPageProps) {
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-4xl font-bold text-black">${symbol}</h1>
-              <p className="text-gray-400 mt-2">AI Generated description of company</p>
+              <p className="text-gray-400 mt-2">{data.company_description}</p>
             </div>
             <div className="text-right">
               <div className="text-2xl font-medium text-black">Overall Sentiment Score:</div>
-              <div className="text-4xl font-bold text-black mt-1">49</div>
+              <div className="text-4xl font-bold text-black mt-1">{data.sentiment_score}</div>
             </div>
           </div>
         </div>
@@ -44,7 +61,9 @@ export default function StockPage({ params }: StockPageProps) {
         {/* Description Section */}
         <div className="bg-gray-50 rounded-xl p-6 mb-8">
           <h2 className="text-lg font-medium text-black mb-4">AI Generated description of the stock...</h2>
-          <div className="h-64 bg-gray-100 rounded-lg"></div>
+          <div className="h-64 bg-gray-100 rounded-lg p-4">
+            {data.reddit_description}
+          </div>
         </div>
 
         {/* Insights Section */}
@@ -59,7 +78,7 @@ export default function StockPage({ params }: StockPageProps) {
                 <div className="w-6 h-6 bg-gray-200 rounded-full"></div>
                 <h3 className="text-lg font-medium text-black">Reddit</h3>
               </div>
-              <p className="text-gray-600">AI Generated summary from curated Reddit communities</p>
+              <p className="text-gray-600">{data.reddit_description}</p>
             </div>
 
             {/* Discord Section */}
