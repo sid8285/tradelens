@@ -45,7 +45,7 @@ function Card({ post }) {
         {post.tickers.map((ticker, idx) => (
           <a
             key={idx}
-            href={`https://www.google.com/finance/quote/${ticker}:NASDAQ`}
+            href={`/stock/${ticker}?company_description=${encodeURIComponent(post.text.slice(0, 50) + (post.text.length > 200 ? '...' : '') || '')}&reddit_description=${encodeURIComponent(post.insights || '')}&sentiment_score=${post.sentiment || 0}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline mr-1"

@@ -6,8 +6,10 @@ export const postsTable = sqliteTable('posts', {
   body: text('body').notNull(),
   createdUtc: text('created_utc').notNull(),
   score: integer('score').notNull(),
-  summary: text('summary').notNull(),
+  text: text('summary').notNull(),
   sentiment: text('sentiment').notNull(),
+  tickers: text('tickers').notNull(),
+  insights: text('insights').notNull()
 });
 
 export type InsertPost = typeof postsTable.$inferInsert;
