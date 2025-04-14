@@ -1,0 +1,16 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '--build-arg', 'OPENAI_KEY=$_OPENAI_KEY',
+        '--build-arg', 'REDDIT_SECRET=$_REDDIT_SECRET',
+        '--build-arg', 'REDDIT_CLIENT_ID=$_REDDIT_CLIENT_ID',
+        '--build-arg', 'TURSO_CONNECTION_URL=$_TURSO_CONNECTION_URL',
+        '--build-arg', 'TURSO_AUTH_TOKEN=$_TURSO_AUTH_TOKEN',
+        '-t', 'gcr.io/tradelens-456803/tradelens-app',
+        '.'
+      ]
+images:
+  - 'gcr.io/tradelens-456803/tradelens-app'
+
